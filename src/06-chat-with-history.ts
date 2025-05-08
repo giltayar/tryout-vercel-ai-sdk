@@ -1,18 +1,11 @@
 import { google } from '@ai-sdk/google'
-import { streamText } from 'ai'
+import { streamText, type CoreMessage } from 'ai'
 import { createInterface } from 'node:readline/promises'
-
-/**
- * @import {CoreMessage} from 'ai'
- */
 
 const model = google('gemini-1.5-flash')
 const rl = createInterface({ input: process.stdin, output: process.stdout })
 
-/**
- * @type {CoreMessage[]}
- */
-const chatHistory = []
+const chatHistory = [] as CoreMessage[]
 
 for (;;) {
   const question = await rl.question('You: ')

@@ -1,14 +1,9 @@
 import { google } from '@ai-sdk/google'
-import { cosineSimilarity, embed, embedMany } from 'ai'
+import { cosineSimilarity, embed, embedMany, type EmbedResult } from 'ai'
 
 const model = google.textEmbeddingModel('text-embedding-004')
 
-const values = [
-  'Dishwasher',
-  'knife',
-  'tv',
-  'carpet',
-]
+const values = ['Dishwasher', 'knife', 'tv', 'carpet']
 
 const { embeddings } = await embedMany({
   model,
@@ -26,12 +21,8 @@ const matched = findClosestMatches(vectorDatabase, searchTermEmbedding)
 
 console.log('Closest matches:', matched)
 
-/**
- * @param {typeof vectorDatabase} vectorDatabase
- * @param {import("ai").EmbedResult<string>} searchTermEmbedding
- */
-function findClosestMatches(vectorDatabase, searchTermEmbedding) {
-  return vectorDatabase
+function findClosestMatches(vdb: typeof vectorDatabase, searchTermEmbedding: EmbedResult<string>) {
+  return vdb
     .map((embedding) => ({
       similarity: cosineSimilarity(searchTermEmbedding.embedding, embedding.vector),
       value: embedding.value,

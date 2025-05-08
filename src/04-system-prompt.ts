@@ -1,5 +1,4 @@
 import { anthropic } from '@ai-sdk/anthropic'
-import { google } from '@ai-sdk/google'
 import { generateText } from 'ai'
 
 const promptResult = await generateText({

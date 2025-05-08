@@ -1,5 +1,5 @@
 import { createOpenAICompatible } from '@ai-sdk/openai-compatible'
-import { streamText } from 'ai'
+import { streamText, type CoreMessage } from 'ai'
 import { createInterface } from 'node:readline/promises'
 
 /**
@@ -14,10 +14,7 @@ const model = lmstudio('gemma-3-12b-it')
 
 const rl = createInterface({ input: process.stdin, output: process.stdout })
 
-/**
- * @type {CoreMessage[]}
- */
-const chatHistory = []
+const chatHistory = [] as CoreMessage[]
 
 for (;;) {
   const question = await rl.question('You: ')
